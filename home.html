@@ -1,0 +1,358 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IRTBDP</title>
+    <link rel="icon" type="image" href="Images/logo.png">
+    <!-- <link rel="stylesheet" href="unifiedCss.css"> -->
+
+    <style>
+        h1 {
+            font-size: 34;
+        }
+
+        h1 button {
+            background-image: linear-gradient(rgb(44, 164, 239), rgb(87, 224, 248));
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            margin: 0 5px;
+            width: 120px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        header {
+            background-color: midnightblue;
+            height: 100px;
+            color: black;
+            border: 4px solid black;
+            text-align: center;
+            font-size: 45px;
+            color: white;
+            padding: 0.2;
+        }
+
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            height: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide img {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            opacity: 0.7;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+        }
+
+        button {
+            width: 85px;
+            height: 50px;
+            font-size: 16.5;
+        }
+
+        #ss {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            z-index: 2;
+            font-size: 20px;
+        }
+
+        #form-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            z-index: 2;
+            font-size: 20px;
+        }
+
+
+
+        #ss table {
+            border-collapse: separate;
+            border-spacing: 10px;
+        }
+
+        #ss input {
+            padding: 8px;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+        }
+
+        #form-container input {
+            padding: 8px;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+        }
+
+        #ss button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            margin: 5px;
+            min-width: 120px;
+        }
+
+        #form-container button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            margin: 5px;
+            min-width: 120px;
+        }
+
+        #form-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.4);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            z-index: 2;
+            font-size: 20px;
+            width: 350px;
+        }
+
+        #form-container .form-group {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #form-container label {
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        #form-container input {
+            padding: 8px;
+            font-size: 16px;
+            width: 100%;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+        }
+
+        #form-container .form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        #form-container button {
+            padding: 12px 25px;
+            font-size: 18px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background-color: white;
+            color: black;
+            margin: 5px;
+            min-width: 120px;
+            transition: all 0.3s ease;
+        }
+
+        #form-container button:hover {
+            background-color: #e0e0e0;
+        }
+
+        #purposeBox {
+            position: fixed;
+            /* Keeps it fixed on the left side */
+            top: 17%;
+            /* Adjust based on where you want it to start */
+            left: 0;
+            width: 250px;
+            /* Width of the box */
+            height: 70%;
+            /* Adjust height to suit your content */
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Dark transparent background */
+            color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 3;
+            /* Ensure it is above the slideshow and other elements */
+            border-radius: 10px;
+            overflow-y: auto;
+            /* Allows scrolling if content exceeds box height */
+        }
+
+        #purposeBox h2 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #purposeBox p {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+
+        .form-buttons button {
+            background-image: linear-gradient(rgb(44, 164, 239), rgb(87, 224, 248));
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            margin: 0 5px;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+    </style>
+
+</head>
+<header>
+    <h1 style="color: ghostwhite;">
+        <em>Indian Railways Ticket Booking (for Ordinary and Disabled
+            Persons)</em>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <button onclick="window.location.href='criteria.html'">Criteria</button>
+        <!-- <button onclick="window.location.href='report.html'">Report</button> not required for now -->
+
+        <button onclick="window.location.href='aboutIR.html'">About Us</button>
+    </h1>
+
+</header>
+
+<body>
+    <div class="slideshow-container" view>
+        <div class="slide active"><img src="Images/Wap4.jpg" alt="Image 1"></div>
+        <div class="slide"><img src="Images/Wap7.jpg" alt="Image 2"></div>
+        <div class="slide"><img src="Images/Diseal.jpg" alt="Image 3"></div>
+        <div class="slide"><img src="Images/VandeBharat.jpg" alt="Image 4"></div>
+        <div class="slide"><img src="Images/WDG.jpg" alt="Image 5"></div>
+
+        <div id="form-container">
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="phone" style="margin-bottom: 25px;">Phone Number</label>
+                    <input type="tel" id="phone" name="ph" placeholder="Enter your phone number..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" style="margin-bottom: 0px;">Password</label>
+                    <br> <!-- Added line break to shift the password input to the next line -->
+                    <input type="password" id="password" name="ps" placeholder="Enter your password..."
+                        style="margin-top: 0px;">
+                </div>
+
+                <div class="form-buttons">
+                    <button type="submit">Sign In</button>
+                    <button type="button" onclick="window.location.href='sign_up.html'">Sign Up</button>
+                </div>
+            </form>
+        </div>
+
+        <script>
+            document.getElementById('loginForm').addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const phone = document.getElementById('phone').value.trim();
+                const pass = document.getElementById('password').value.trim();
+
+                if (!phone || !pass) {
+                    alert('Fill in both fields!');
+                    return;
+                }
+
+                try {
+                    const formData = new FormData();
+                    formData.append('ph', phone);
+                    formData.append('pass', pass);
+
+                    const res = await fetch('login.php', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const data = await res.json();
+
+                    if (data.success) {
+                        window.location.href = 'ui.html';
+                    } else {
+                        alert(data.message || 'User does not exist… please Sign Up first!');
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert('Oops, user does not exist… please Sign Up first!');
+                }
+            });
+        </script>
+
+
+    </div>
+    <div id="purposeBox">
+        <h2>Purpose of Our Website</h2>
+        <p>This website aims to provide an easy and efficient ticket booking system for passengers, suffering from
+            Cancer and from Disabilities (like Unstable mental state, etc.) traveling on Indian Railways. We focus on
+            delivering a user-friendly interface for both ordinary and disabled persons to access railway tickets with
+            ease.</p>
+        <p>The disabled person should have Unique disability card so that we can be verify that using registered phone
+            number, only after that the person get discount to Railway tickets. A chart is also available at the
+            top-right corner to check discount criteria.</p>
+    </div>
+
+    <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll(".slide");
+
+        function showSlides() {
+            slides.forEach((slide, i) => {
+                slide.classList.remove("active");
+            });
+            slideIndex = (slideIndex + 1) % slides.length;
+            slides[slideIndex].classList.add("active");
+        }
+        showSlides();
+        setInterval(showSlides, 3000);
+    </script>
+
+</body>
+
+</html>

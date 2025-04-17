@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IRTBDP</title>
+  <link rel="icon" type="image" href="Images/logo.png">
+  <script src="UI.js"></script>
+  <style>
+    h1 {
+      font-size: 34px;
+    }
+
+    header {
+      background-color: midnightblue;
+      height: 100px;
+      color: white;
+      border: 4px solid black;
+      text-align: center;
+      font-size: 32px;
+      padding: 10px;
+    }
+
+    .header-buttons button {
+      width: 100px;
+      height: 40px;
+      font-size: 14px;
+      margin-top: 40px;
+      margin-left: 10px;
+    }
+  </style>
+    <link rel="stylesheet" href="ui.css">
+
+</head>
+
+<body>
+  <header>
+    <div>
+      <h1><em>Indian Railways Ticket Booking</em>
+        <a href="Home.html">
+          <img src="Images/home.png" width="5%" height="5%" align="right">
+        </a>
+      </h1>
+      <div class="header-buttons">
+        <button onclick="window.location.href='Criteria.html'">Criteria</button>
+        <button onclick="window.location.href='aboutIR.html'">About Us</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="dashboard">
+    <div class="option_buttons">
+      <button onclick="showSection('add')">Book Ticket</button>
+      <button onclick="showSection('view')">Report an Issue</button>
+      <button onclick="showSection('edit')">Cancel Ticket</button>
+    </div>
+    <!-- Book Ticket Section -->
+    <div id="addSection" style="display: none;">
+      <div class="container">
+        <form id="ticketForm">
+          <div>
+            <label for="name">Passenger Name</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+
+          <div>
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" required>
+          </div>
+
+          <div>
+            <label for="from">From</label>
+            <select id="from" name="from" required>
+              <option value="">-- Select Starting Station --</option>
+              <option value="Kolkata">Kolkata</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Bangalore">Bangalore</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Ahmedabad">Ahmedabad</option>
+              <option value="Pune">Pune</option>
+              <option value="Jaipur">Jaipur</option>
+              <option value="Lucknow">Lucknow</option>
+              <option value="Bhopal">Bhopal</option>
+              <option value="Patna">Patna</option>
+              <option value="Guwahati">Guwahati</option>
+              <option value="Indore">Indore</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="to">To</label>
+            <select id="to" name="to" required>
+              <option value="">-- Select Destination Station --</option>
+              <option value="Kolkata">Kolkata</option>
+              <option value="Delhi">Delhi</option>
+              <option value="Mumbai">Mumbai</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Bangalore">Bangalore</option>
+              <option value="Hyderabad">Hyderabad</option>
+              <option value="Ahmedabad">Ahmedabad</option>
+              <option value="Pune">Pune</option>
+              <option value="Jaipur">Jaipur</option>
+              <option value="Lucknow">Lucknow</option>
+              <option value="Bhopal">Bhopal</option>
+              <option value="Patna">Patna</option>
+              <option value="Guwahati">Guwahati</option>
+              <option value="Indore">Indore</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="train_name">Train Name</label>
+            <select id="train_name" name="train_name" required onchange="updateTrainNumber()">
+              <option value="">-- Select Train --</option>
+              <option value="Rajdhani Express">Rajdhani Express</option>
+              <option value="Shatabdi Express">Shatabdi Express</option>
+              <option value="Duronto Express">Duronto Express</option>
+              <option value="Garib Rath">Garib Rath</option>
+              <option value="Tejas Express">Tejas Express</option>
+              <option value="Vande Bharat Express">Vande Bharat Express</option>
+              <option value="Intercity Express">Intercity Express</option>
+              <option value="Humsafar Express">Humsafar Express</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="train_number">Train Number</label>
+            <input type="text" id="train_number" name="train_number" readonly>
+          </div>
+
+          <div>
+            <label for="coach_pref_1">Coach Preference</label>
+            <select id="coach_pref_1" name="coach_pref_1">
+              <option value="Sleeper">Sleeper</option>
+              <option value="AC3">AC3</option>
+              <option value="AC2">AC2</option>
+              <option value="AC1">AC1</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="berth_pref_1">Berth Preference</label>
+            <select id="berth_pref_1" name="berth_pref_1">
+              <option value="No Preference">No Preference</option>
+              <option value="Lower">Lower</option>
+              <option value="Middle">Middle</option>
+              <option value="Upper">Upper</option>
+              <option value="Side Lower">Side Lower</option>
+              <option value="Side Upper">Side Upper</option>
+            </select>
+          </div>
+
+
+          <div>
+            <label for="date">Journey Date</label>
+            <input type="date" id="date" name="date" required>
+          </div>
+
+          <div>
+            <label for="tickets">Number of Tickets</label>
+            <input type="number" id="tickets" name="tickets" min="1" required oninput="updatePassengerFields()">
+          </div>
+
+          <div id="passenger-fields"></div>
+
+          <div class="checkbox-container full-width">
+            <input type="checkbox" id="disabled" onchange="toggleDisabilityFields()">
+            <label for="disabled">Passenger is disabled (eligible for concession)</label>
+          </div>
+
+
+          <div id="disability-fields">
+            <div>
+              <label for="disability_id">Disability ID</label>
+              <input type="text" id="disability_id" name="disability_id">
+            </div>
+            <div>
+              <label for="disability_doc">Upload Supporting Document</label>
+              <input type="file" id="disability_doc" name="disability_doc" accept=".pdf,.jpg,.jpeg,.png">
+            </div>
+          </div>
+
+          <div class="full-width">
+            <button type="submit">Book Ticket</button>
+          </div>
+        </form>
+      </div>
+
+      <script>
+        const trainMap = {
+          "Rajdhani Express": "12301",
+          "Shatabdi Express": "12001",
+          "Duronto Express": "12245",
+          "Garib Rath": "12909",
+          "Tejas Express": "22671",
+          "Vande Bharat Express": "22436",
+          "Intercity Express": "12127",
+          "Humsafar Express": "22920"
+        };
+
+        function updateTrainNumber() {
+          const trainName = document.getElementById('train_name').value;
+          const trainNumberInput = document.getElementById('train_number');
+          trainNumberInput.value = trainMap[trainName] || '';
+        }
+
+        function toggleDisabilityFields() {
+          const checkbox = document.getElementById('disabled');
+          const disabilityFields = document.getElementById('disability-fields');
+          disabilityFields.style.display = checkbox.checked ? 'grid' : 'none';
+        }
+
+        function updatePassengerFields() {
+          const numberOfTickets = parseInt(document.getElementById('tickets').value, 10);
+          const passengerFieldsContainer = document.getElementById('passenger-fields');
+          passengerFieldsContainer.innerHTML = '';
+
+          for (let i = 2; i <= numberOfTickets; i++) {
+            const passengerFields = document.createElement('div');
+            passengerFields.classList.add('passenger-info');
+            passengerFields.style.gridColumn = "1 / -1";
+            passengerFields.innerHTML = `
+          <div style="margin-bottom: 10px;">
+            <label for="passenger_name_${i}">Passenger ${i} Name</label>
+            <input type="text" id="passenger_name_${i}" name="passenger_name_${i}" required>
+          </div>
+          <div>
+            <label for="passenger_age_${i}">Passenger ${i} Age</label>
+            <input type="number" id="passenger_age_${i}" name="passenger_age_${i}" required>
+          </div>
+          <div>
+            <label for="coach_pref_${i}">Coach Preference</label>
+            <select id="coach_pref_${i}" name="coach_pref_${i}">
+              <option value="Sleeper">Sleeper</option>
+              <option value="AC3">AC3</option>
+              <option value="AC2">AC2</option>
+              <option value="AC1">AC1</option>
+            </select>
+          </div>
+          <div>
+            <label for="berth_pref_${i}">Berth Preference</label>
+            <select id="berth_pref_${i}" name="berth_pref_${i}">
+              <option value="No Preference">No Preference</option>
+              <option value="Lower">Lower</option>
+              <option value="Middle">Middle</option>
+              <option value="Upper">Upper</option>
+              <option value="Side Lower">Side Lower</option>
+              <option value="Side Upper">Side Upper</option>
+            </select>
+          </div>
+        `;
+            passengerFieldsContainer.appendChild(passengerFields);
+          }
+        }
+
+        function handleFormSubmit(event) {
+          event.preventDefault();
+
+          const name = document.getElementById('name').value;
+          const age = document.getElementById('age').value;
+          const from = document.getElementById('from').value;
+          const to = document.getElementById('to').value;
+          const date = document.getElementById('date').value;
+          const trainName = document.getElementById('train_name').value;
+          const trainNumber = document.getElementById('train_number').value;
+          const tickets = parseInt(document.getElementById('tickets').value);
+          const isDisabled = document.getElementById('disabled').checked;
+          const disabilityID = document.getElementById('disability_id')?.value;
+          const coachPref1 = document.getElementById('coach_pref_1').value;
+          const berthPref1 = document.getElementById('berth_pref_1').value;
+
+          if (from === to) {
+            alert("Starting and destination stations cannot be the same.");
+            return;
+          }
+
+          let details = `🎫 TICKET DETAILS 🎫
+  
+  Passenger 1:
+  Name: ${name}
+  Age: ${age}
+  Coach Preference: ${coachPref1}
+  Berth Preference: ${berthPref1}
+  
+  From: ${from}
+  To: ${to}
+  Train: ${trainName} (${trainNumber})
+  Journey Date: ${date}
+  Number of Tickets: ${tickets}`;
+
+          if (isDisabled) {
+            details += `
+  
+  Passenger is eligible for concession
+  Disability ID: ${disabilityID || "N/A"}`;
+          }
+
+          for (let i = 2; i <= tickets; i++) {
+            const pname = document.getElementById(`passenger_name_${i}`)?.value || 'N/A';
+            const page = document.getElementById(`passenger_age_${i}`)?.value || 'N/A';
+            const coach = document.getElementById(`coach_pref_${i}`)?.value || 'N/A';
+            const berth = document.getElementById(`berth_pref_${i}`)?.value || 'N/A';
+            details += `
+  
+  Passenger ${i}:
+  Name: ${pname}
+  Age: ${page}
+  Coach Preference: ${coach}
+  Berth Preference: ${berth}`;
+          }
+
+          // Save ticket as text file
+          const blob = new Blob([details], { type: 'text/plain' });
+          const link = document.createElement('a');
+          link.href = URL.createObjectURL(blob);
+          link.download = 'ticket_booking.txt';
+          link.click();
+
+          // Visual message
+          const messageBox = document.createElement('div');
+          messageBox.textContent = "✅ Ticket booked successfully! Check your downloads.";
+          messageBox.style.cssText = "color: green; text-align: center; margin-top: 20px; font-weight: bold;";
+          document.querySelector(".container").appendChild(messageBox);
+
+          // Reset form
+          document.getElementById("ticketForm").reset();
+          document.getElementById("passenger-fields").innerHTML = '';
+          document.getElementById("train_number").value = '';
+          document.getElementById("disability-fields").style.display = "none";
+
+          setTimeout(() => {
+            messageBox.remove();
+          }, 5000);
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+          document.getElementById("ticketForm").addEventListener("submit", handleFormSubmit);
+
+          const dateInput = document.getElementById("date");
+          const today = new Date().toISOString().split('T')[0];
+          dateInput.setAttribute('min', today);
+        });
+      </script>
+    </div>
+  </div>
+
+  <!-- Report Issue Section -->
+  <div id="viewSection" style="display: none;">
+    <div class="container">
+      <form action="#" method="POST" enctype="multipart/form-data">
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="mobile">Mobile Number</label>
+        <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" required placeholder="e.g., 9876543210">
+
+        <label for="date">Date of Incident</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="trainno">Train Number</label>
+        <input type="text" id="trainno" name="trainno" required>
+
+        <label for="category">Issue Category</label>
+        <select id="category" name="category" required>
+          <option value="">-- Select --</option>
+          <option value="ticketing">Ticketing Issue</option>
+          <option value="train">Train Delay</option>
+          <option value="cleanliness">Cleanliness</option>
+          <option value="staff">Staff Behavior</option>
+          <option value="other">Other</option>
+        </select>
+
+        <label for="message">Describe the Issue</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+
+        <button type="submit">Submit Issue</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Cancel Ticket Section -->
+  <div id="editSection" style="display: none;">
+    <div class="container">
+      <!-- Table and Search UI -->
+      <!-- ... use the table from original code -->
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>
