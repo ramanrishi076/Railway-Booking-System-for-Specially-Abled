@@ -1,0 +1,188 @@
+body {
+  background-color: azure;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+.container {
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-buttons {
+  margin-top: 10px;
+}
+
+.header-buttons button {
+  background-image: linear-gradient(rgb(44, 164, 239), rgb(87, 224, 248));
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  margin: 0 5px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.header-buttons button:hover {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.option_buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.option_buttons button {
+  padding: 15px;
+  border-radius: 10px;
+  border: none;
+  width: 180px;
+  color: white;
+  background-image: linear-gradient(to bottom, rgb(8, 54, 111), rgb(21, 121, 184));
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s ease;
+}
+
+.option_buttons button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+form {
+  background-color: lightgrey;
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  border: 2px solid black;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+input[type="text"],input[type="tel"], input[type="email"], input[type="number"], input[type="date"], input[type="file"], select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+}
+
+button[type="submit"] {
+  background-color: #1f78d1;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+  background-color: #155ca1;
+}
+
+#disability-fields {
+  display: none;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.passenger-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.search-container {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.search-container input {
+  padding: 8px;
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  width: 200px;
+}
+
+.search-container button {
+  padding: 10px;
+  background-color: #1f78d1;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-container button:hover {
+  background-color: #155ca1;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background-color: #e0f7ff;
+}
+
+th, td {
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: center;
+}
+
+td.actions {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+td.actions button {
+  padding: 5px 10px;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+td.actions button:nth-child(1) {
+  background-color: #007bff;
+}
+
+td.actions button:nth-child(2) {
+  background-color: crimson;
+}
+
+td.actions button:hover {
+  opacity: 0.9;
+}

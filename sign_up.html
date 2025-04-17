@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign up</title>
+  <style>
+    h1 {
+      text-align: center;
+      padding-bottom: 20px;
+    }
+
+
+    h2 {
+      font-size: 40px;
+      text-align: center;
+    }
+
+    form {
+      border: 2px solid black;
+      padding: 20px;
+      background-color: lightgrey;
+      transition: box-shadow 1s;
+      margin-top: 20px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 500px;
+      border-radius: 10px;
+    }
+
+    form:hover {
+      box-shadow: 0 0 15px black;
+    }
+
+    input {
+      display: block;
+      width: 95%;
+      border-radius: 5px;
+      padding: 5px;
+      margin-bottom: 15px;
+    }
+
+    input:focus {
+      box-shadow: 0 0 5px black;
+    }
+
+    label {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 2px;
+    }
+
+    button {
+      background-image: linear-gradient(rgb(44, 164, 239), rgb(87, 224, 248));
+      width: 100%;
+      margin: 5px;
+      padding: 10px;
+      font-size: 20px;
+    }
+
+    button:hover {
+      box-shadow: 0 0 5px black;
+    }
+
+    .form-container {
+      width: 350px;
+      margin: 80px auto;
+      padding: 25px;
+      border: 2px solid black;
+      border-radius: 15px;
+      background: rgb(233, 233, 233);
+      box-shadow: 0 4px 10px rgba(255, 105, 180, 0.2);
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 6px;
+      color: black;
+    }
+
+    input[type="text"],
+    input[type="password"], input[type="email"],
+    input[type="tel"] {
+      padding: 10px;
+      border: 1px solid black;
+      border-radius: 8px;
+      outline: none;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      margin-right: 20px;
+    }
+
+    input[type="text"]:focus,
+    input[type="password"]:focus,input[type="email"]:focus,
+    input[type="tel"]:focus {
+      border-color: black;
+      box-shadow: 0 0 8px rgba(255, 105, 180, 0.3);
+    }
+
+    .form-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #ff69b4;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff1493;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="signupform">
+    <form method="POST" action="sign_up.php">
+      <h2>Sign Up</h2>
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" name="name" placeholder="Name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Email" required>
+
+      <label for="phone_num">Phone Number:</label>
+      <input type="tel" id="phone_num" name="ph" placeholder="Phone Number" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="pass" name="pass" placeholder="Password" required>
+
+      <label for="confirm_password">Confirm Password:</label>
+      <input type="password" id="cpass" name="cpass" placeholder="Confirm Password" required>
+
+      <label for="terms" style="display: flex; align-items: center; gap: 10px;">
+        <input type="checkbox" id="terms" name="terms" style="width: fit-content;" required>
+        <span>I accept the <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.</span>
+      </label>
+
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.querySelector('form');
+  
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const pass  = document.getElementById('pass').value.trim();
+      const cpass = document.getElementById('cpass').value.trim();
+  
+      if (pass !== cpass) {
+        alert("Passwords don’t match!");
+        return;
+      }
+  
+      const formData = new FormData(form);
+  
+      fetch('sign_up.php', {
+        method: 'POST',
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          window.location.href = 'home.html';
+        } else {
+          alert(data.message || "Something went wrong!");
+        }
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        alert("Unable to complete the request!");
+      });
+    });
+  </script>
+  
+
+</body>
+
+</html>
